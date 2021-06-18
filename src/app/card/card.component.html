@@ -1,0 +1,66 @@
+<div class="card">
+    <h2 >Card Component </h2>
+    <!--  [ngStyle] это называется Директивы(Указания) в них можно прописывать условия, структурные компоненты начинаются co * (*ngIf, *ngFor) и позволяют менять структуру   -->
+    <h3 
+    [ngStyle]="{   
+        color: cardIns.title.length < 5 ? '#444' : 'blue',
+        fontWeight: cardIns.title.length < 10 ? '400' : '700'
+    }"
+    >{{ cardIndex }} {{ cardIns.title }}</h3>   <!--  {{}} - Этот символ это интерполяция -->
+
+    <h4 class="subtitle" [ngClass]="{
+        blue: collorSubtitle === 'blue',
+        red: collorSubtitle === 'red',
+        green: collorSubtitle === 'green'
+    }">{{ cardIns.text }}</h4>
+
+    <h4 class="subtitle"
+    [class.blue]="collorSubtitle === 'blue'"
+    [class.red]="collorSubtitle === 'red'"
+    [class.green]="collorSubtitle === 'green'"
+    >{{ cardIns.text }}</h4>
+
+
+
+
+
+    <h5>{{ getInfo() }}</h5>
+    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta, ad?</p>
+    <p>Number: {{ cardNumber }}</p> <!--  angular пытается ко всем типам данным применить toString() -->
+    <pre>
+        {{ cardData | json}}   <!--  | (pipe) применяет метод JSON.stringify к объекту -->
+    </pre>
+    <div class="card_img">
+        <img [src]="imgUrlAng">  <!-- [] Это баиндинг или привязка данных, когда imgUrlAng воспринимается как переменная -->
+    </div>
+
+    <div>
+        <strong>
+            {{cardDate | date: 'dd-MMMM-yyyy  HH:mm:ss':undefined:'ru'}}
+        </strong>
+    </div>
+
+
+    <div> <!--   этот метод называется two way binding (двусторонее связывание)-->
+        <input type="text" (input)="inputHandler($event)" [value]="cardIns.title"> <!--  $ нужен для того чтоб Ангуляр понял что это нативный параметр и од должен сам его передавать -->
+        <input type="text" #refSecondInput (input)="inputHandlerSecond(refSecondInput.value)" [value]="cardIns.title"> <!--  $ нужен для того чтоб Ангуляр понял что это нативный параметр и од должен сам его передавать -->
+    </div>
+
+    <div> <!--   другой метод реализации two way binding (двусторонее связывание). Для этого нужно подключить FormComponent модуль в app.module.ts-->
+        <input type="text" [(ngModel)]="cardIns.title" (ngModelChange)="inputChangeHandler() " > <!--  $ нужен для того чтоб Ангуляр понял что это нативный параметр и од должен сам его передавать -->
+    </div>                                                                               <!--  через ngModelChange доступна также что-то вроде onChange метода -->
+
+
+    <div class="card_btns">
+        <button [disabled]="disabledButton">Active</button>
+        <button (click)="changeTitle()">Cnange title</button>
+        <button (click)="title = 'Inline title'">Cnange title inline</button>
+    </div>
+
+    <div class="card_btns">
+        <button (click)="collorSubtitle = 'red'"  >RED</button>
+        <button (click)="collorSubtitle = 'green'" >GREEN</button>
+        <button (click)="collorSubtitle = 'blue'" >BLUE</button>
+    </div>
+
+</div>
