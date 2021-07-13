@@ -1,24 +1,18 @@
 import { Component } from '@angular/core';
+import { CardApp } from './home/home.component';
+import { GlobalData } from './shared/services/global.data.service';
+import { NewsService } from './shared/services/news.service';
 
-export interface CardApp {
-  title: string
-  text: string
-}
+
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
+  providers: [GlobalData, NewsService], 
 })
 export class AppComponent {
-  isCardsShowed = true
+  constructor() { }
 
-  cards :CardApp[] = [
-    {title: 'Card1', text: 'This is first card'},
-    {title: 'This is card 2', text: 'This is second card'},
-    {title: 'Last card', text: 'This is card 3'},
-  ]
-
-  toggleCard() {
-    this.isCardsShowed = !this.isCardsShowed
+  ngOnInit(): void {
   }
 }

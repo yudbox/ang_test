@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core' // Component, Input  Это дикоратор
-import { CardApp } from '../app.component' 
+import { CardApp } from '../home/home.component';
 
 // template: `
 // <div class="card">
@@ -17,6 +17,25 @@ import { CardApp } from '../app.component'
 //     }
 //     `
 // ]
+
+
+// <<<-----------------Bindings или привязки------------>>>>>
+
+// это механизм который позволяет Шаблону(HTML) и Классу(TS) обмениваться информацией
+// 1. Interpolation bindings - связь одностороняя Class -> Template. <p> {{title}}</p> Позволяет 
+//  выводить значение переменных и методов Класса в шаблон. В Шаблоне можно также писать выражения напрямую {{2*2}}
+
+// 2. Property(input) bindings - связь одностороняя Class -> Template, но позволяет менять значение
+// свойств HTML элементов которая интерполяция не может. < button[disabled]="myBoolValue" > </>, 
+// <h1[hidden]="!title" > </h1>
+
+// 3. Two-way-data-binding (двустороняя привязка) - это когда через функцию меняется переменная 
+// Класса и она сразу выводится в другом элементе шаблона <input [(ngModel)]="user.email" />
+
+// 4. Event binding(событийная привязка) - когда мы привязываемся на событие в Шаблоне и после
+// срабатывания события, вызывается метод в Классе <button mat-button (click)="useLanguage(lang)">Click Me</button>
+
+
 
 @Component({
     selector: 'app-card',
