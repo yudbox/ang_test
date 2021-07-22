@@ -5,6 +5,8 @@ import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 
 import { AppRoutingModule } from './app-routing.module';
+
+
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
 import { FormComponent } from './form/form.component';
@@ -12,6 +14,9 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { NewsComponent } from './news/news.component';
 import { NotFoundComponent } from './not-found/not-found.component';
+import { HttpClientModule } from '@angular/common/http';
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService } from './shared/services/in-memory-data.service';
 
 
 registerLocaleData(localeRu, 'ru')
@@ -29,6 +34,12 @@ registerLocaleData(localeRu, 'ru')
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    HttpClientModule,
+
+    //этот модуль перехватыват все HTTP и когда появится настоящий бекенд эту строку нужно будет удалить
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false}  // помещаем наш сервис InMemoryDataService который расширяет эмулятор запросов InMemoryDbService в этот модуль. dataEncapsulation: false означает будут ли наш ответ оборачиваться в объект data или нет. по умолчанию true
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

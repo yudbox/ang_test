@@ -28,7 +28,7 @@
     <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Soluta, ad?</p>
     <p>Number: {{ cardNumber }}</p> <!--  angular пытается ко всем типам данным применить toString() -->
     <pre>
-        {{ cardData | json}}   <!--  | (pipe) применяет метод JSON.stringify к объекту -->
+        {{ cardData | json}}   <!--  | () применяет метод JSON.stringify к объекту -->
     </pre>
     <div class="card_img">
         <img [src]="imgUrlAng">  <!-- [] Это баиндинг или привязка данных, когда imgUrlAng воспринимается как переменная -->

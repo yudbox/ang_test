@@ -11,7 +11,9 @@ export class NewsComponent implements OnInit {
   public newsData: Array<any> = []
   
   constructor(private globalData: GlobalData) {   // добавили сервис в приватную переменную globalData, это можно делать тк наш сервис помечен дикоратором Injectable
-    this.newsData = globalData.getNews()  // применили метод сервиса и положили его в другую переменную
+    // this.newsData = globalData.getNews()  // применили метод сервиса и положили его в другую переменную
+
+    globalData.getNews().subscribe(data=> this.newsData = data)
    }
   
   ngOnInit(): void {

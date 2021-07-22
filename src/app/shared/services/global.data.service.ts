@@ -1,5 +1,6 @@
 import { Observable, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -7,14 +8,26 @@ import { Injectable } from '@angular/core';
 export class GlobalData {
 
 
-    constructor() { }
+    constructor(
+        private httpClient: HttpClient
+    ) { }
+
+
+    //в пути обязательно указываем api/weather слово которое мы указали в return {weather};
+    private weatherUrl = 'api/weather'
     
-    public getNews(): Array<any> {
-        return [
-            { title: 'sunny', text: 'very good' },
-            { title: 'cloudy', text: 'anyway happy' },
-            { title: 'rain', text: 'sadding weather' },
-        ]
+    public getNews(): Observable<Array<any>> {
+        return this.httpClient.get<any[]>(this.weatherUrl)
+
+
+        // сервис возвраще\ает данные если нет Observable и HTTP запроса
+        // return [
+        //     { title: 'sunny', text: 'very good' },
+        //     { title: 'cloudy', text: 'anyway happy' },
+        //     { title: 'rain', text: 'sadding weather' },
+        // ]
+
+
     }
 }
 //Dependency injection - внедрение зависимостей, т.е присвоение переменным данных из Сервиса
